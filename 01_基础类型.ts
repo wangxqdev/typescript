@@ -19,7 +19,7 @@ let x: [string, number];
 x = ['hello', 10];
 /* 枚举 */
 enum Color {
-    RED = 1, YELLOW, BLUE
+  RED = 1, YELLOW, BLUE
 }
 let c: Color = Color.BLUE;
 let cName: string = Color[2];
@@ -29,7 +29,7 @@ notSure = "maybe a string instead";
 notSure = false;
 /* Void */
 function warnUser(): void {
-    console.log("This is my warning message");
+  console.log("This is my warning message");
 }
 /* Null 和 Undefined */
 let u: undefined = undefined;
@@ -37,17 +37,17 @@ let n: null = null;
 /* Never */
 // 返回never的函数必须存在无法达到的终点
 function error(message: string): never {
-    throw new Error(message);
+  throw new Error(message);
 }
 // 推断的返回值类型为never
 function fail() {
-    return error("Something failed");
+  return error("Something failed");
 }
 // 返回never的函数必须存在无法达到的终点
 function infiniteLoop(): never {
-    while (true) {
+  while (true) {
 
-    }
+  }
 }
 /* Object */
 declare function create(o: object | null): void;
