@@ -109,8 +109,9 @@ function area(s: Shape) {
 }
 
 /* 索引类型 */
-// keyof T: 索引类型查询操作符
-// T[K]: 索引访问操作符
+// keyof T: 索引类型查询操作符, 对于任何类型 T， keyof T 的结果为 T 上已知的公共属性名的联合。
+// eg: keyof Person 是完全可以与 'name' | 'age'互相替换的
+// T[K]: 索引访问操作符，结果=>属性类型
 function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {
   return names.map(n => o[n]);
 }
@@ -133,6 +134,13 @@ let keys: keyof Map2<number>;
 let value: Map2<number>['foo'];
 
 /* 映射类型 */
+type Keys = 'option1' | 'option2';
+type Flags = { [K in Keys]: boolean };
+// 映射结果
+// type Flags = {
+//   option1: boolean;
+//   option2: boolean;
+// }
 type ReadOnly<T> = { readonly [P in keyof T]: T[P] };
 type Partial2<T> = { [P in keyof T]?: T[P] };
 type PersonReadOnly = ReadOnly<Person>;
@@ -146,8 +154,10 @@ type Proxify<T> = {
   [P in keyof T]: Proxy<T[P]>;
 }
 function proxify<T>(o: T): Proxify<T> { }
+
 /* 由映射类型进行推断 */
 function unproxify<T>(t: Proxify<T>): T {
+  // 类型断言
   let result = {} as T;
   for (const k in t) {
     result[k] = t[k].get();
